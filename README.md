@@ -4,4 +4,4 @@ The code is meant to be shared via a blog post. We build a demo that uses the AW
 
 ## License
 
-This library is licensed under the Apache 2.0 License. 
+This library is licensed under the Apache 2.0 License and MIT-0. 
