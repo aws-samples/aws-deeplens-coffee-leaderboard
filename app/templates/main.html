@@ -1,0 +1,119 @@
+<!-- 
+	
+  Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  
+  Licensed under the Apache License, Version 2.0 (the "License").
+  You may not use this file except in compliance with the License.
+  A copy of the License is located at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  or in the "license" file accompanying this file. This file is distributed 
+  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
+  express or implied. See the License for the specific language governing 
+  permissions and limitations under the License.
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Coffee counter</title>
+	<meta charset="utf-8">
+	<!-- <meta http-equiv="refresh" content="10"/> -->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+</head>
+
+<body class="ui grid" style="margin-top:40px">
+	<div style="margin-left: 60px; height:1800px; overflow: scroll;" class="ten wide column">
+		<div id="rows">
+			<div class="ui stackable grid">
+				{% for index in range(0, items|length) %}
+					<img class="four wide ui column middle aligned tiny image" src='{{items[index].url}}' height="300" width="300">
+					<div class="four wide column">
+						<h3 class="inline ui header">Position:</h3>  
+						<h4 class="inline">{{index+1}}</h4>
+						{% if index == 0 %}
+							<img class="inline" style="top:10px" src='https://image.flaticon.com/icons/svg/179/179249.svg' height="15" width="15">
+						{% elif index == 1 %}
+							<img class="inline" style="top:10px" src='https://www.shareicon.net/data/128x128/2016/07/23/800715_medal_512x512.png' height="15" width="15">
+						{% elif index == 2 %}
+							<img class="inline" style="top:10px" src='https://image.flaticon.com/icons/svg/179/179250.svg' height="15" width="15">
+						{% endif %}			
+						</br>
+						<h3 class="inline ui header">Counter:</h3>  
+						<h4 class="inline">{{items[index].counter}}</h4>
+						</br>
+						<h3 class="ui inline header">Last Coffee: </h3>
+						<h4 class="inline">{{items[index].time}}</h4>
+					</div>
+					{% if index % 2 == 0 %}
+						<div style="height:100%" class="vertical divider ui"></div>
+					{% else %}
+						<div class="ui divider"></div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<div class="four wide column">
+		<h3 class="ui header">Last activity</h3>		
+		<table class="ui very basic table">
+			<thead>
+				<tr>
+					<th>Action</th>
+					<th>Time</th>
+					<th>Image</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<tr>
+						<td>{{lastItem.action}}</td>
+						<td>{{lastItem.lasttime}}</td>
+						<td><img src='{{lastItem.lasturl}}' height="90" width="150"></td>
+					</tr>
+				</tr>
+			</tbody>
+		</table>
+		
+		<h3 class="ui header">Previous 24 hour activity</h3>		
+		<div class="ui relaxed divided list" style="height: 600px;overflow: scroll;">
+			{% if logs|length != 0 %}
+				{% for log in logs %}
+					<div class="item">
+						<div class="header">{{log.msg}}</div>
+						{{log.time}}
+					</div>
+				{% endfor %}
+			{% else %}
+				<h4 class="ui header">No activity :(</h3>		
+			{% endif %}
+		</div>
+	</div>
+	<button class="circular ui icon button" onclick="stop()">
+			<i class="icon stop"></i>
+		</button>
+	
+</body>
+</html>
+
+<style>
+	.inline{
+		display: inline;
+	}
+</style>
+
+<script>
+	var id = setTimeout(function(){
+		window.location.reload(1);
+	}, 10000);
+	function stop(){
+		clearTimeout(id);
+	}
+</script>
