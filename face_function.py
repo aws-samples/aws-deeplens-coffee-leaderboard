@@ -12,7 +12,7 @@ rekognition = boto3.client('rekognition')
 
 
 face_collection = "Faces" # Name of the face collection that the AWS Rekognition uses
-face_match_treshold = 70 # Match Treshold for the faces to be concidered the same person
+face_match_threshold = 70 # Match Threshold for the faces to be concidered the same person
 logging_table = 'logs' # DynamoDB table name for the log files
 
 
@@ -56,7 +56,7 @@ def detect_faces(image, bucket, key):
 
     # Checks if user face is already registered in rekongtion collection
     faces = rekognition.search_faces_by_image(CollectionId=face_collection, Image=image,
-                                              FaceMatchThreshold=face_match_treshold, MaxFaces=1)
+                                              FaceMatchThreshold=face_match_threshold, MaxFaces=1)
 
     if len(faces['FaceMatches']) == 1:  # User is already registered in the collection
         # Authenticate
@@ -69,7 +69,7 @@ def detect_faces(image, bucket, key):
         score = int(item['score']['S'])
         unixtime = int(item['unixtime']['S'])
         new_score = str(score + 1)
-        utime = int(time.time())#Current Unix Time
+        utime = int(time.time()) # Current Unix Time
         time_5_minutes_ago = int(utime) - 300
         
         #Checks if 5 minutes passed since the last upload
