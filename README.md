@@ -1,6 +1,6 @@
 # coffee-leaderboard
 
-This repository is part of a [blog post]() that guides users through creating a coffee leaderboard that uses face detection to track the number of coffee people drink using the [AWS DeepLens](https://aws.amazon.com/deeplens/)
+This repository is part of a [blog post](https://aws.amazon.com/blogs/machine-learning/track-the-number-of-coffees-consumed-using-aws-deeplens/) that guides users through creating a coffee leaderboard that uses face detection to track the number of coffee people drink using the [AWS DeepLens](https://aws.amazon.com/deeplens/)
 
 Following the steps described in the [blog post](), the final architecture is this: 
 
