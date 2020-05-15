@@ -16,7 +16,7 @@ bucket_name = '<BUCKET_NAME>'
 
 @application.route("/")
 def main():    
-    table_faces = client.scan(TableName = 'faces')
+    table_faces = client.scan(TableName = 'Faces')
     lastItem = {}
     items, logs = [], []
     lasttime = 0
