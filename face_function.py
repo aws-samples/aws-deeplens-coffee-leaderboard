@@ -63,7 +63,7 @@ def detect_faces(image, bucket, key):
     if len(faces['FaceMatches']) == 1:  # User is already registered in the collection
         # Authenticate
         faceid = faces['FaceMatches'][0]['Face']['FaceId']
-        item = dynamodb.get_item(TableName='faces', Key={'faceID': {'S': str(faceid)}})
+        item = dynamodb.get_item(TableName='Faces', Key={'faceID': {'S': str(faceid)}})
 
         # Gets the item
         item = item['Item']
@@ -74,7 +74,7 @@ def detect_faces(image, bucket, key):
         
         #Checks if 5 minutes passed since the last upload
         if unixtime < time_5_minutes_ago:
-            dynamodb.update_item(TableName='faces', Key={'faceID': {'S': str(face_id)}},
+            dynamodb.update_item(TableName='Faces', Key={'faceID': {'S': str(face_id)}},
                                  UpdateExpression="set score = :val, unixtime =:val2, s3Bucket = :val3, pathToImage = :val4",
                                  ExpressionAttributeValues={
                                      ':val': {'S': new_score},
@@ -129,7 +129,7 @@ def detect_faces(image, bucket, key):
         else:
             face_id = faces['FaceRecords'][0]['Face']['FaceId']
             dynamodb.put_item(
-                TableName='faces',
+                TableName='Faces',
                 Item={
                     'faceID': {'S': face_id},
                     'score': {'S': '1'},
