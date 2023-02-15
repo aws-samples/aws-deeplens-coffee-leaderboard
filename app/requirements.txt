@@ -12,5 +12,5 @@ python-dateutil==2.6.1
 pytz==2017.3
 s3transfer==0.1.12
 six==1.11.0
-Werkzeug==0.15.3
+Werkzeug==2.2.3
 zope.interface==4.4.3
